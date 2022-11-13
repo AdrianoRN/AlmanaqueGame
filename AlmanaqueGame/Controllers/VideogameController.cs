@@ -1,14 +1,14 @@
 using Microsoft.AspNetCore.Mvc;
 using AlmanaqueGame.Models;
  
-namespace ProjetoMySQL.Controllers
+namespace AlmanaqueGame.Controllers
 {
     [Route("[controller]/[action]")]
     [ApiController]
     public class VideogameController : ControllerBase
     {
         private BDContexto contexto;
- 
+        
         public VideogameController(BDContexto bdContexto)
         {
             contexto = bdContexto;
@@ -33,9 +33,10 @@ namespace ProjetoMySQL.Controllers
             contexto.SaveChanges();
             return "Game cadastrado com sucesso!";
         }
+   
 
         [HttpDelete]
-        public string Excluir([FromBody]int id)
+        public string Excluir([FromBody] int id)
         {
             Videogame dados = contexto.Videogames.FirstOrDefault(p => p.Id == id);
             
@@ -47,6 +48,7 @@ namespace ProjetoMySQL.Controllers
             {
                 contexto.Remove(dados);
                 contexto.SaveChanges();
+                
                 return "Game removido com sucesso!";
             }
         }
